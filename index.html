@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Belajar Interaktif - Latihan Bahasa & Matematika Konkret</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Bubblegum Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- JS Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-fredoka { font-family: 'Fredoka', cursive; }
+        .badge-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-amber-50/60 text-slate-800 min-h-screen flex flex-col selection:bg-amber-200">
+
+    <!-- Header Navbar -->
+    <header class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center text-xl text-yellow-200 shadow-inner">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div>
+                    <h1 class="font-fredoka text-lg md:text-xl font-bold tracking-wide">Petualangan Belajar Interaktif</h1>
+                    <p class="text-xs text-amber-100 flex items-center gap-1">
+                        <i class="fa-solid fa-heart text-rose-300"></i> Latihan Mandiri Bahasa & Numerasi Konkret
+                    </p>
+                </div>
+            </div>
+
+            <!-- Micro Learning Timer & Stars -->
+            <div class="flex items-center gap-3">
+                <!-- Star Counter -->
+                <div class="bg-white/20 backdrop-blur px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-sm font-bold border border-white/30">
+                    <i class="fa-solid fa-star text-yellow-300 text-base"></i>
+                    <span id="starCountDisplay">0</span>
+                </div>
+                
+                <!-- Timer Widget -->
+                <div class="bg-orange-600/80 px-3 py-1.5 rounded-xl flex items-center gap-2 text-xs font-semibold border border-orange-400">
+                    <i class="fa-solid fa-stopwatch text-amber-200"></i>
+                    <span id="timerDisplay">15:00</span>
+                    <button onclick="toggleTimer()" id="timerBtn" title="Mulai / Jeda Sesi Micro-Learning" class="ml-1 px-2 py-0.5 bg-white text-orange-600 rounded text-xs font-bold hover:bg-amber-100 transition">
+                        <i class="fa-solid fa-play" id="timerIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-6 flex-grow w-full space-y-6">
+
+        <!-- Welcome Banner / Micro-Learning Info -->
+        <div class="bg-white rounded-3xl p-5 shadow-sm border border-amber-200/80 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-4">
+                <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl shrink-0 font-fredoka">
+                    👋
+                </div>
+                <div>
+                    <h2 class="font-fredoka text-xl text-slate-800 font-bold">Halo, Bintang Kecil!</h2>
+                    <p class="text-xs md:text-sm text-slate-600">Pilih modul petualangan di bawah ini. Sesi latihan direkomendasikan <strong>10–15 menit</strong> agar tetap menyenangkan!</p>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full md:w-auto">
+                <button onclick="playAudio('Halo, selamat belajar hari ini! Mari kita berlatih bersama-sama.')" class="w-full md:w-auto px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 border border-amber-300">
+                    <i class="fa-solid fa-volume-high text-amber-600"></i> Sapa Belajar
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <button onclick="switchTab('seq')" id="tab-seq" class="tab-btn active p-3.5 bg-white border-2 border-indigo-500 rounded-2xl shadow-sm text-left transition hover:border-indigo-600 flex flex-col items-start gap-2">
+                <span class="p-2 bg-indigo-100 text-indigo-600 rounded-xl text-lg"><i class="fa-solid fa-list-ol"></i></span>
+                <div>
+                    <div class="font-fredoka text-sm font-bold text-slate-800">1. Urutan Cerita</div>
+                    <div class="text-[11px] text-slate-500">Pertama - Lalu - Terakhir</div>
+                </div>
+            </button>
+
+            <button onclick="switchTab('words')" id="tab-words" class="tab-btn p-3.5 bg-white border-2 border-slate-200 rounded-2xl shadow-sm text-left transition hover:border-indigo-400 flex flex-col items-start gap-2">
+                <span class="p-2 bg-blue-100 text-blue-600 rounded-xl text-lg"><i class="fa-solid fa-magnifying-glass font-bold"></i></span>
+                <div>
+                    <div class="font-fredoka text-sm font-bold text-slate-800">2. Tebak Kata</div>
+                    <div class="text-[11px] text-slate-500">Latihan Word-Finding</div>
+                </div>
+            </button>
+
+            <button onclick="switchTab('math-conc')" id="tab-math-conc" class="tab-btn p-3.5 bg-white border-2 border-slate-200 rounded-2xl shadow-sm text-left transition hover:border-emerald-400 flex flex-col items-start gap-2">
+                <span class="p-2 bg-emerald-100 text-emerald-600 rounded-xl text-lg"><i class="fa-solid fa-cubes"></i></span>
+                <div>
+                    <div class="font-fredoka text-sm font-bold text-slate-800">3. Benda Konkret</div>
+                    <div class="text-[11px] text-slate-500">Hitung & Jodohkan Angka</div>
+                </div>
+            </button>
+
+            <button onclick="switchTab('math-sym')" id="tab-math-sym" class="tab-btn p-3.5 bg-white border-2 border-slate-200 rounded-2xl shadow-sm text-left transition hover:border-rose-400 flex flex-col items-start gap-2">
+                <span class="p-2 bg-rose-100 text-rose-600 rounded-xl text-lg"><i class="fa-solid fa-plus-minus"></i></span>
+                <div>
+                    <div class="font-fredoka text-sm font-bold text-slate-800">4. Cerita Simbol</div>
+                    <div class="text-[11px] text-slate-500">Makna +, -, dan =</div>
+                </div>
+            </button>
+        </div>
+
+        <!-- Tab 1: Urutan Cerita (Sequencing) -->
+        <div id="mod-seq" class="module-panel bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 pb-4 border-b border-slate-100">
+                <div>
+                    <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold rounded-full">Bahasa Ekspresif</span>
+                    <h3 class="font-fredoka text-xl text-slate-800 font-bold mt-1">Petualangan Urutan Cerita (Sequencing)</h3>
+                    <p class="text-xs text-slate-500">Susun 3 langkah kegiatan sesuai urutan kata kunci: <strong>Pertama</strong>, <strong>Lalu</strong>, dan <strong>Terakhir</strong>.</p>
+                </div>
+                <button onclick="speakSeqQuestion()" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0 border border-indigo-200">
+                    <i class="fa-solid fa-volume-high"></i> Dengarkan Soal
+                </button>
+            </div>
+
+            <!-- Question Context -->
+            <div class="bg-indigo-50/60 rounded-2xl p-4 border border-indigo-100">
+                <p class="text-sm font-bold text-indigo-950 flex items-center gap-2" id="seqQuestionText">
+                    <i class="fa-solid fa-circle-question text-indigo-600"></i> Cerita: Rutinitas Sebelum Makan Roti
+                </p>
+                <p class="text-xs text-slate-600 mt-1">Pilih gambar/kalimat untuk diletakkan pada urutan yang benar.</p>
+            </div>
+
+            <!-- Slots Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Slot 1 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border-2 border-dashed border-indigo-300 flex flex-col items-center justify-center min-h-[160px] relative text-center" id="slot-0" onclick="clearSlot(0)">
+                    <span class="text-xs font-extrabold text-indigo-600 uppercase tracking-wider mb-2">1. PERTAMA</span>
+                    <div id="slot-content-0" class="text-slate-400 text-xs italic flex flex-col items-center">
+                        <i class="fa-regular fa-square-plus text-2xl mb-1 text-slate-300"></i>
+                        Pilih kartu di bawah
+                    </div>
+                </div>
+
+                <!-- Slot 2 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border-2 border-dashed border-indigo-300 flex flex-col items-center justify-center min-h-[160px] relative text-center" id="slot-1" onclick="clearSlot(1)">
+                    <span class="text-xs font-extrabold text-indigo-600 uppercase tracking-wider mb-2">2. LALU</span>
+                    <div id="slot-content-1" class="text-slate-400 text-xs italic flex flex-col items-center">
+                        <i class="fa-regular fa-square-plus text-2xl mb-1 text-slate-300"></i>
+                        Pilih kartu di bawah
+                    </div>
+                </div>
+
+                <!-- Slot 3 -->
+                <div class="bg-slate-50 rounded-2xl p-4 border-2 border-dashed border-indigo-300 flex flex-col items-center justify-center min-h-[160px] relative text-center" id="slot-2" onclick="clearSlot(2)">
+                    <span class="text-xs font-extrabold text-indigo-600 uppercase tracking-wider mb-2">3. TERAKHIR</span>
+                    <div id="slot-content-2" class="text-slate-400 text-xs italic flex flex-col items-center">
+                        <i class="fa-regular fa-square-plus text-2xl mb-1 text-slate-300"></i>
+                        Pilih kartu di bawah
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Options Cards -->
+            <div>
+                <p class="text-xs font-bold text-slate-700 mb-2">Pilihan Kartu Acak (Ketuk untuk memasukkan ke urutan):</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="seqCardContainer">
+                    <!-- Injected by JS -->
+                </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex flex-col sm:flex-row justify-between items-center pt-3 border-t border-slate-100 gap-3">
+                <div class="flex items-center gap-3">
+                    <button onclick="resetSeqStory()" class="px-4 py-2 text-xs font-bold text-slate-600 hover:text-slate-800 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-rotate-left"></i> Ulangi Susunan
+                    </button>
+                    <span class="text-xs text-slate-500 font-semibold" id="seqProgressText">Cerita 1 dari 8</span>
+                </div>
+                <div class="flex gap-2 w-full sm:w-auto">
+                    <button onclick="checkSeqAnswer()" class="w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-check-circle"></i> Periksa Jawaban
+                    </button>
+                    <button onclick="nextSeqQuestion()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5">
+                        Cerita Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="seqFeedback" class="hidden p-3.5 rounded-2xl text-xs font-bold border"></div>
+        </div>
+
+        <!-- Tab 2: Tebak Kata & Word-Finding -->
+        <div id="mod-words" class="module-panel hidden bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 pb-4 border-b border-slate-100">
+                <div>
+                    <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">Pencarian Kata (Word-Finding)</span>
+                    <h3 class="font-fredoka text-xl text-slate-800 font-bold mt-1">Detektif Penemu Kata</h3>
+                    <p class="text-xs text-slate-500">Dengarkan petunjuk ciri-cirinya, lalu temukan nama benda yang tepat tanpa bingung!</p>
+                </div>
+            </div>
+
+            <!-- Clue Box -->
+            <div class="bg-blue-50/70 rounded-2xl p-5 border border-blue-100 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-blue-800 uppercase tracking-wide flex items-center gap-1.5">
+                        <i class="fa-solid fa-lightbulb text-amber-500 text-sm"></i> Petunjuk Ciri-Ciri Benda:
+                    </span>
+                    <button onclick="speakWordClue()" class="px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-lg shadow-sm hover:bg-blue-700 transition flex items-center gap-1">
+                        <i class="fa-solid fa-volume-high"></i> Baca Petunjuk
+                    </button>
+                </div>
+                <p class="font-fredoka text-base md:text-lg text-slate-800 bg-white p-4 rounded-xl border border-blue-200 shadow-sm leading-relaxed" id="wordClueText">
+                    "Benda ini berbentuk panjang, dipakai untuk menulis di buku, dan kalau salah bisa dihapus..."
+                </p>
+                <div class="text-xs text-blue-900 bg-blue-100/50 p-2.5 rounded-xl border border-blue-200 flex items-center gap-2">
+                    <i class="fa-solid fa-clock text-blue-600"></i>
+                    <span><strong>Tips Orang Tua:</strong> Berikan jeda 5-10 detik agar Hayu berpikir sejenak sebelum menjawab.</span>
+                </div>
+            </div>
+
+            <!-- Options Grid -->
+            <div>
+                <p class="text-xs font-bold text-slate-700 mb-3">Mana kata yang paling cocok?</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="wordOptionsContainer">
+                    <!-- Injected by JS -->
+                </div>
+            </div>
+
+            <!-- Sentence Construction Bonus -->
+            <div id="wordSentenceBox" class="hidden bg-emerald-50 rounded-2xl p-4 border border-emerald-200 space-y-2">
+                <p class="text-xs font-bold text-emerald-900 flex items-center gap-1">
+                    <i class="fa-solid fa-comments text-emerald-600"></i> Mari Gunakan Kata Ini Dalam Kalimat Runtut:
+                </p>
+                <p class="text-sm text-slate-800 font-semibold italic bg-white p-3 rounded-xl border border-emerald-100" id="wordSentenceText">
+                    <!-- Injected by JS -->
+                </p>
+                <button onclick="speakWordSentence()" class="px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-lg hover:bg-emerald-700 transition flex items-center gap-1">
+                    <i class="fa-solid fa-volume-high"></i> Dengarkan Kalimat Lisan
+                </button>
+            </div>
+
+            <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                <span class="text-xs text-slate-500" id="wordProgressText">Soal 1 dari 4</span>
+                <button onclick="nextWordQuestion()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-1.5">
+                    Soal Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab 3: Matematika Konkret (CRA Counting) -->
+        <div id="mod-math-conc" class="module-panel hidden bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 pb-4 border-b border-slate-100">
+                <div>
+                    <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full">Numerasi Konkret (Diskalkulia)</span>
+                    <h3 class="font-fredoka text-xl text-slate-800 font-bold mt-1">Menghitung Benda Nyata & Kartu Angka</h3>
+                    <p class="text-xs text-slate-500">Hitung jumlah benda visual di meja, lalu jodohkan dengan kartu angka yang tepat.</p>
+                </div>
+            </div>
+
+            <!-- Visual Counting Playground -->
+            <div class="bg-emerald-50/60 rounded-2xl p-5 border border-emerald-100 space-y-4 text-center">
+                <p class="text-xs font-bold text-emerald-900 uppercase tracking-wide">
+                    Hitung Benda Di Bawah Ini Satu Per Satu:
+                </p>
+                
+                <!-- Concrete Visual Objects Container -->
+                <div class="flex flex-wrap items-center justify-center gap-3 min-h-[100px] bg-white p-5 rounded-2xl border border-emerald-200 shadow-inner" id="mathObjectVisuals">
+                    <!-- Visual items injected by JS -->
+                </div>
+
+                <p class="text-xs text-slate-600">Ketuk setiap benda untuk menghitung suara lisan lho!</p>
+            </div>
+
+            <!-- Number Cards Selection -->
+            <div>
+                <p class="text-xs font-bold text-slate-700 mb-3 text-center">Pilih Kartu Angka Yang Sesuai Jumlah Benda:</p>
+                <div class="flex flex-wrap justify-center gap-3" id="mathNumberCards">
+                    <!-- Injected by JS -->
+                </div>
+            </div>
+
+            <div id="mathConcFeedback" class="hidden p-3.5 rounded-2xl text-xs font-bold border text-center"></div>
+
+            <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                <button onclick="speakMathCountHint()" class="px-3 py-2 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-xl hover:bg-emerald-200 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-volume-high"></i> Bantuan Hitung Lisan
+                </button>
+                <span class="text-xs text-slate-500 font-semibold" id="mathConcProgressText">Soal 1 dari 8</span>
+                <button onclick="nextMathConcQuestion()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-1.5">
+                    Ganti Benda <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab 4: Cerita Simbol Matematika -->
+        <div id="mod-math-sym" class="module-panel hidden bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-3 pb-4 border-b border-slate-100">
+                <div>
+                    <span class="px-3 py-1 bg-rose-100 text-rose-700 text-xs font-bold rounded-full">Makna Simbol Kontekstual</span>
+                    <h3 class="font-fredoka text-xl text-slate-800 font-bold mt-1">Petualangan Simbol (+ / - / =)</h3>
+                    <p class="text-xs text-slate-500">Pahami arti simbol lewat cerita harian agar tidak tertukar lagi.</p>
+                </div>
+            </div>
+
+            <!-- Symbol Cards Knowledge Bar -->
+            <div class="grid grid-cols-3 gap-3 text-center">
+                <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl">
+                    <span class="font-fredoka text-2xl font-bold text-emerald-600 block">+</span>
+                    <span class="text-xs font-bold text-emerald-900 block">DATANG LAGI</span>
+                    <span class="text-[10px] text-emerald-700">(Digabung / Bertambah)</span>
+                </div>
+                <div class="bg-rose-50 border border-rose-200 p-3 rounded-2xl">
+                    <span class="font-fredoka text-2xl font-bold text-rose-600 block">-</span>
+                    <span class="text-xs font-bold text-rose-900 block">PERGI / HILANG</span>
+                    <span class="text-[10px] text-rose-700">(Dimakan / Berkurang)</span>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 p-3 rounded-2xl">
+                    <span class="font-fredoka text-2xl font-bold text-amber-600 block">=</span>
+                    <span class="text-xs font-bold text-amber-900 block">HASIL AKHIR</span>
+                    <span class="text-[10px] text-amber-700">(Sama Dengan / Jadi)</span>
+                </div>
+            </div>
+
+            <!-- Context Story Prompt -->
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-book-open text-rose-500"></i> Cerita Harian Matematika:
+                    </span>
+                    <button onclick="speakSymStory()" class="px-3 py-1 bg-rose-600 text-white text-xs font-bold rounded-lg hover:bg-rose-700 transition flex items-center gap-1">
+                        <i class="fa-solid fa-volume-high"></i> Dengarkan Cerita
+                    </button>
+                </div>
+                <p class="font-fredoka text-base md:text-lg text-slate-800 bg-white p-4 rounded-xl border border-slate-200 shadow-sm leading-relaxed" id="symStoryText">
+                    "Hayu punya 3 kue biskuit di piring. Lalu Ibu **memberikan lagi** 2 kue biskuit. Simbol matematika yang cocok untuk kata 'memberikan lagi' adalah..."
+                </p>
+            </div>
+
+            <!-- Choices -->
+            <div class="grid grid-cols-3 gap-3" id="symChoicesContainer">
+                <!-- Injected by JS -->
+            </div>
+
+            <div id="symFeedback" class="hidden p-3.5 rounded-2xl text-xs font-bold border text-center"></div>
+
+            <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                <span class="text-xs text-slate-500" id="symProgressText">Soal 1 dari 3</span>
+                <button onclick="nextSymQuestion()" class="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-1.5">
+                    Cerita Simbol Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Reward Board & Sticker Collection -->
+        <div class="bg-white rounded-3xl p-5 shadow-sm border border-amber-200 space-y-3">
+            <div class="flex items-center justify-between">
+                <h3 class="font-fredoka text-base font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-award text-amber-500 text-lg"></i> Papan Bintang & Stiker Hadiah
+                </h3>
+                <span class="text-xs text-slate-500">Kumpulkan bintang setiap menyelesaikan latihan!</span>
+            </div>
+            
+            <div class="grid grid-cols-5 sm:grid-cols-10 gap-2 text-center" id="stickerGrid">
+                <!-- Injected by JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-4 mt-6">
+        <div class="max-w-5xl mx-auto px-4 text-center text-xs text-slate-500">
+            Aplikasi Belajar Interaktif Mandiri &copy; 2026 • Didesain Khusus untuk Pendampingan Bahasa & Numerasi Konkret Anak.
+        </div>
+    </footer>
+
+    <script>
+        let stars = 0;
+        let timerSeconds = 15 * 60;
+        let timerInterval = null;
+        let isTimerRunning = false;
+
+        // Sound Synthesis setup
+        const synth = window.speechSynthesis;
+
+        function playAudio(text) {
+            if (!synth) return;
+            synth.cancel(); // stop previous speech
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'id-ID';
+            utterance.rate = 0.88; // Slightly slower pace for clearer comprehension
+            utterance.pitch = 1.05; // Friendly tone
+            synth.speak(utterance);
+        }
+
+        // Web Audio API Sound Effects (No external URLs needed)
+        function playSfx(type) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    osc.frequency.exponentialRampToValueAtTime(659.25, ctx.currentTime + 0.15); // E5
+                    osc.frequency.exponentialRampToValueAtTime(783.99, ctx.currentTime + 0.3); // G5
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.4);
+                } else if (type === 'click') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(400, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.08);
+                }
+            } catch(e) {
+                // Fallback gracefully if Web Audio is restricted
+            }
+        }
+
+        function toggleTimer() {
+            const btnIcon = document.getElementById('timerIcon');
+            if (isTimerRunning) {
+                clearInterval(timerInterval);
+                isTimerRunning = false;
+                btnIcon.className = 'fa-solid fa-play';
+            } else {
+                isTimerRunning = true;
+                btnIcon.className = 'fa-solid fa-pause';
+                timerInterval = setInterval(() => {
+                    if (timerSeconds > 0) {
+                        timerSeconds--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        isTimerRunning = false;
+                        btnIcon.className = 'fa-solid fa-play';
+                        playAudio("Sesi belajar 15 menit sudah selesai! Hebat sekali, sekarang waktunya istirahat sebentar ya.");
+                    }
+                }, 1000);
+            }
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            document.getElementById('timerDisplay').innerText = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+        }
+
+        function addStar() {
+            stars++;
+            document.getElementById('starCountDisplay').innerText = stars;
+            renderStickerBoard();
+            
+            // Trigger Confetti
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 40,
+                    spread: 60,
+                    origin: { y: 0.8 }
+                });
+            }
+        }
+
+        function renderStickerBoard() {
+            const container = document.getElementById('stickerGrid');
+            container.innerHTML = '';
+            const totalSlots = 10;
+            const emojis = ['⭐', '🏆', '🎈', '🚀', '🎨', '🧩', '🧸', '🍦', '🦁', '👑'];
+
+            for (let i = 0; i < totalSlots; i++) {
+                const isUnlocked = i < stars;
+                const slotHtml = `
+                    <div class="aspect-square rounded-2xl flex items-center justify-center text-xl transition ${isUnlocked ? 'bg-amber-100 border-2 border-amber-400 shadow-sm scale-105' : 'bg-slate-100 border border-slate-200 opacity-40'}">
+                        ${isUnlocked ? emojis[i % emojis.length] : '🔒'}
+                    </div>
+                `;
+                container.innerHTML += slotHtml;
+            }
+        }
+
+        function switchTab(tabId) {
+            playSfx('click');
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active', 'border-indigo-500', 'border-emerald-400', 'border-rose-400', 'border-blue-400');
+                b.classList.add('border-slate-200');
+            });
+
+            document.querySelectorAll('.module-panel').forEach(m => m.classList.add('hidden'));
+
+            const targetTab = document.getElementById(`tab-${tabId}`);
+            const targetMod = document.getElementById(`mod-${tabId}`);
+
+            targetTab.classList.add('active');
+            if (tabId === 'seq') targetTab.classList.add('border-indigo-500');
+            if (tabId === 'words') targetTab.classList.add('border-blue-400');
+            if (tabId === 'math-conc') targetTab.classList.add('border-emerald-400');
+            if (tabId === 'math-sym') targetTab.classList.add('border-rose-400');
+
+            targetMod.classList.remove('hidden');
+        }
+
+        const seqData = [
+            {
+                storyTitle: "Cerita: Rutinitas Sebelum Makan Roti",
+                cards: [
+                    { id: 'c1', text: "Mencuci tangan sampai bersih", step: 1, icon: "🧽" },
+                    { id: 'c2', text: "Mengambil roti & makan", step: 2, icon: "🍞" },
+                    { id: 'c3', text: "Minum air putih", step: 3, icon: "🥛" }
+                ]
+            },
+            {
+                storyTitle: "Cerita: Persiapan Menulis Buku",
+                cards: [
+                    { id: 'c1', text: "Buka tas dan ambil buku", step: 1, icon: "🎒" },
+                    { id: 'c2', text: "Pegang pensil dengan rapi", step: 2, icon: "✏️" },
+                    { id: 'c3', text: "Mulai menulis di kertas", step: 3, icon: "📝" }
+                ]
+            },
+            {
+                storyTitle: "Cerita: Menanam Bunga di Pot",
+                cards: [
+                    { id: 'c1', text: "Memasukkan tanah ke pot", step: 1, icon: "🪴" },
+                    { id: 'c2', text: "Menanam benih bunga", step: 2, icon: "🌱" },
+                    { id: 'c3', text: "Menyiram air dengan gayung", step: 3, icon: "💧" }
+                ]
+            },
+            {
+                storyTitle: "Cerita: Menggosok Gigi Sebelum Tidur",
+                cards: [
+                    { id: 'c1', text: "Beri pasta gigi ke sikat", step: 1, icon: "🪥" },
+                    { id: 'c2', text: "Menggosok gigi melingkar", step: 2, icon: "😁" },
+                    { id: 'c3', text: "Berkumur air sampai bersih", step: 3, icon: "🪞" }
+                ]
+            },
+            {
+                storyTitle: "Cerita: Memakai Sepatu Sekolah",
+                cards: [
+                    { id: 'c1', text: "Memakai kaus kaki rapi", step: 1, icon: "🧦" },
+                    { id: 'c2', text: "Memasukkan kaki ke sepatu", step: 2, icon: "👟" },
+                    { id: 'c3', text: "Mengikat tali sepatu", step: 3, icon: "🎀" }
+                ]
+            },
+            {
+                storyTitle: "Cerita: Membuat Teh Manis Bersama Ibu",
+                cards: [
+                    { id: 'c1', text: "Seduh teh dengan air hangat", step: 1, icon: "🫖" },
+                    { id: 'c2', text: "Masukkan satu sendok gula", step: 2, icon: "🥄" },
+                    { id: 'c3', text: "Aduk hingga gula larut", step: 3, icon: "☕" }
+                ]
+            },
+            {
+                storyTitle: "Cerita: Mencuci Buah Apel",
+                cards: [
+                    { id: 'c1', text: "Ambil buah apel segar", step: 1, icon: "🍎" },
+                    { id: 'c2', text: "Cuci dengan air mengalir", step: 2, icon: "🚰" },
+                    { id: 'c3', text: "Lap sampai bersih dan kering", step: 3, icon: "✨" }
+                ]
+            },
+            {
+                storyTitle: "Cerita: Persiapan Tidur Malam",
+                cards: [
+                    { id: 'c1', text: "Ganti baju dengan baju tidur", step: 1, icon: "👕" },
+                    { id: 'c2', text: "Cuci kaki & gosok gigi", step: 2, icon: "🧼" },
+                    { id: 'c3', text: "Matikan lampu & berdoa", step: 3, icon: "🌙" }
+                ]
+            }
+        ];
+
+        let currentSeqIndex = 0;
+        let seqSlotSelections = [null, null, null];
+
+        function loadSeqStory() {
+            const data = seqData[currentSeqIndex];
+            document.getElementById('seqQuestionText').innerHTML = `<i class="fa-solid fa-circle-question text-indigo-600"></i> ${data.storyTitle}`;
+            if (document.getElementById('seqProgressText')) {
+                document.getElementById('seqProgressText').innerText = `Cerita ${currentSeqIndex + 1} dari ${seqData.length}`;
+            }
+
+            // Shuffle cards display
+            const shuffled = [...data.cards].sort(() => Math.random() - 0.5);
+            const container = document.getElementById('seqCardContainer');
+            container.innerHTML = '';
+
+            shuffled.forEach(card => {
+                container.innerHTML += `
+                    <button onclick="selectSeqCard('${card.id}')" id="card-btn-${card.id}" class="p-3 bg-white border-2 border-slate-200 rounded-2xl shadow-sm hover:border-indigo-400 hover:bg-indigo-50/50 transition flex items-center space-x-3 text-left">
+                        <span class="text-2xl">${card.icon}</span>
+                        <span class="text-xs font-semibold text-slate-800">${card.text}</span>
+                    </button>
+                `;
+            });
+
+            resetSeqStory();
+        }
+
+        function selectSeqCard(cardId) {
+            playSfx('click');
+            const data = seqData[currentSeqIndex];
+            const cardObj = data.cards.find(c => c.id === cardId);
+
+            // Find first empty slot
+            const emptyIndex = seqSlotSelections.indexOf(null);
+            if (emptyIndex === -1) return; // All full
+
+            seqSlotSelections[emptyIndex] = cardObj;
+            
+            // Hide selection button
+            document.getElementById(`card-btn-${cardId}`).classList.add('opacity-30', 'pointer-events-none');
+
+            // Render in slot
+            const slotEl = document.getElementById(`slot-content-${emptyIndex}`);
+            slotEl.innerHTML = `
+                <span class="text-3xl mb-1">${cardObj.icon}</span>
+                <span class="text-xs font-bold text-slate-800">${cardObj.text}</span>
+                <span class="text-[10px] text-rose-500 font-bold mt-1">(Ketuk untuk lepas)</span>
+            `;
+
+            playAudio(cardObj.text);
+        }
+
+        function clearSlot(slotIndex) {
+            const cardObj = seqSlotSelections[slotIndex];
+            if (!cardObj) return;
+
+            playSfx('click');
+            seqSlotSelections[slotIndex] = null;
+
+            // Re-enable card button
+            const btn = document.getElementById(`card-btn-${cardObj.id}`);
+            if (btn) btn.classList.remove('opacity-30', 'pointer-events-none');
+
+            // Reset slot text
+            document.getElementById(`slot-content-${slotIndex}`).innerHTML = `
+                <i class="fa-regular fa-square-plus text-2xl mb-1 text-slate-300"></i>
+                Pilih kartu di bawah
+            `;
+        }
+
+        function resetSeqStory() {
+            seqSlotSelections = [null, null, null];
+            for (let i = 0; i < 3; i++) {
+                document.getElementById(`slot-content-${i}`).innerHTML = `
+                    <i class="fa-regular fa-square-plus text-2xl mb-1 text-slate-300"></i>
+                    Pilih kartu di bawah
+                `;
+            }
+            const data = seqData[currentSeqIndex];
+            data.cards.forEach(c => {
+                const btn = document.getElementById(`card-btn-${c.id}`);
+                if (btn) btn.classList.remove('opacity-30', 'pointer-events-none');
+            });
+            const fb = document.getElementById('seqFeedback');
+            fb.classList.add('hidden');
+        }
+
+        function checkSeqAnswer() {
+            const fb = document.getElementById('seqFeedback');
+            fb.classList.remove('hidden');
+
+            if (seqSlotSelections.includes(null)) {
+                fb.className = "p-3.5 rounded-2xl text-xs font-bold border bg-amber-50 text-amber-900 border-amber-200";
+                fb.innerText = "Isi ketiga kotak urutan terlebih dahulu ya!";
+                playAudio("Isi ketiga kotak urutan terlebih dahulu ya!");
+                return;
+            }
+
+            const isCorrect = seqSlotSelections[0].step === 1 && seqSlotSelections[1].step === 2 && seqSlotSelections[2].step === 3;
+
+            if (isCorrect) {
+                playSfx('correct');
+                addStar();
+                fb.className = "p-3.5 rounded-2xl text-xs font-bold border bg-emerald-50 text-emerald-900 border-emerald-200";
+                fb.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Luar biasa! Urutannya tepat sekali: Pertama ${seqSlotSelections[0].text}, Lalu ${seqSlotSelections[1].text}, Terakhir ${seqSlotSelections[2].text}!`;
+                playAudio(`Luar biasa! Urutannya tepat sekali! Pertama ${seqSlotSelections[0].text}, Lalu ${seqSlotSelections[1].text}, Terakhir ${seqSlotSelections[2].text}.`);
+            } else {
+                fb.className = "p-3.5 rounded-2xl text-xs font-bold border bg-rose-50 text-rose-900 border-rose-200";
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> Mari kita coba susun kembali bersama-sama. Ingat kata kunci: Pertama, Lalu, dan Terakhir!`;
+                playAudio("Mari kita coba susun kembali bersama-sama. Ingat kata kunci: Pertama, Lalu, dan Terakhir!");
+            }
+        }
+
+        function nextSeqQuestion() {
+            currentSeqIndex = (currentSeqIndex + 1) % seqData.length;
+            loadSeqStory();
+        }
+
+        function speakSeqQuestion() {
+            const data = seqData[currentSeqIndex];
+            playAudio(`Mari susun ${data.storyTitle}. Pilih kartu mana yang dilakukan Pertama, Lalu, dan Terakhir.`);
+        }
+
+        const wordData = [
+            {
+                clue: "Benda ini berbentuk panjang, dipakai untuk menulis di buku, dan kalau salah bisa dihapus.",
+                correct: "Pensil",
+                options: [
+                    { name: "Pensil", icon: "✏️" },
+                    { name: "Piring", icon: "🍽️" },
+                    { name: "Sepatu", icon: "👟" },
+                    { name: "Bola", icon: "⚽" }
+                ],
+                sentence: "Adik menulis tugas menggambar menggunakan pensil warna merah."
+            },
+            {
+                clue: "Benda ini ada di kamar mandi, dipakai untuk membersihkan badan saat mandi pakai air.",
+                correct: "Sabun",
+                options: [
+                    { name: "Sendok", icon: "🥄" },
+                    { name: "Sabun", icon: "🧼" },
+                    { name: "Kacamata", icon: "👓" },
+                    { name: "Buku", icon: "📚" }
+                ],
+                sentence: "Sebelum makan, kita mencuci tangan memakai sabun sampai bersih."
+            },
+            {
+                clue: "Benda ini terbuat dari kertas, punya banyak halaman, dan dipakai untuk dibaca.",
+                correct: "Buku",
+                options: [
+                    { name: "Topi", icon: "🧢" },
+                    { name: "Buku", icon: "📖" },
+                    { name: "Gunting", icon: "✂️" },
+                    { name: "Sisir", icon: "💇" }
+                ],
+                sentence: "Ibu membaca buku cerita bergambar bersama-sama sebelum tidur."
+            },
+            {
+                clue: "Benda ini dibuka saat hujan turun, agar kepala dan baju kita tidak basah kena air hujan.",
+                correct: "Payung",
+                options: [
+                    { name: "Payung", icon: "☂️" },
+                    { name: "Ember", icon: "🪣" },
+                    { name: "Sapu", icon: "🧹" },
+                    { name: "Kipas", icon: "🪭" }
+                ],
+                sentence: "Saat hujan gerimis, adik memakai payung warna biru untuk berjalan."
+            },
+            {
+                clue: "Benda ini dipakai di kaki sebelum berangkat ke sekolah, dibantu dipasang kaus kaki.",
+                correct: "Sepatu",
+                options: [
+                    { name: "Baju", icon: "👕" },
+                    { name: "Topi", icon: "🧢" },
+                    { name: "Sepatu", icon: "👟" },
+                    { name: "Celana", icon: "👖" }
+                ],
+                sentence: "Adik mengikat tali sepatu warna hitam sebelum naik ke sepeda."
+            },
+            {
+                clue: "Benda ini terbuat dari besi atau plastik, dipakai untuk menyuap makanan ke mulut.",
+                correct: "Sendok",
+                options: [
+                    { name: "Sendok", icon: "🥄" },
+                    { name: "Gelas", icon: "🥛" },
+                    { name: "Meja", icon: "🪑" },
+                    { name: "Pisau", icon: "🔪" }
+                ],
+                sentence: "Adik mengambil sendok untuk makan nasi goreng buatan Ibu."
+            },
+            {
+                clue: "Benda ini menempel di dinding rumah, punya jarum penunjuk yang berputar menunjukkan jam.",
+                correct: "Jam Dinding",
+                options: [
+                    { name: "Cermin", icon: "🪞" },
+                    { name: "Jam Dinding", icon: "🕒" },
+                    { name: "Pintu", icon: "🚪" },
+                    { name: "Lampu", icon: "💡" }
+                ],
+                sentence: "Jam dinding menunjukkan jam tujuh pagi waktunya bersiap ke sekolah."
+            },
+            {
+                clue: "Benda ini dipakai untuk mengeringkan badan yang basah setelah selesai mandi.",
+                correct: "Handuk",
+                options: [
+                    { name: "Handuk", icon: "🧻" },
+                    { name: "Karpet", icon: "🧶" },
+                    { name: "Bantal", icon: "🛏️" },
+                    { name: "Ember", icon: "🪣" }
+                ],
+                sentence: "Selesai mandi sore, adik mengeringkan rambut menggunakan handuk lembut."
+            },
+            {
+                clue: "Benda ini dipasang di depan mata dengan dua kaca, membantu kita membaca tulisan dengan jelas.",
+                correct: "Kacamata",
+                options: [
+                    { name: "Topi", icon: "🧢" },
+                    { name: "Kacamata", icon: "👓" },
+                    { name: "Masker", icon: "😷" },
+                    { name: "Anting", icon: "💎" }
+                ],
+                sentence: "Ayah memakai kacamata saat membaca buku cerita bersama."
+            },
+            {
+                clue: "Benda kecil ini diberi pasta gigi, digunakan untuk membersihkan gigi setiap pagi dan malam.",
+                correct: "Sikat Gigi",
+                options: [
+                    { name: "Sisir", icon: "💇" },
+                    { name: "Sikat Gigi", icon: "🪥" },
+                    { name: "Gunting", icon: "✂️" },
+                    { name: "Sabun", icon: "🧼" }
+                ],
+                sentence: "Adik menggosok gigi sampai bersih menggunakan sikat gigi warna hijau."
+            }
+        ];
+
+        let currentWordIndex = 0;
+
+        function loadWordQuestion() {
+            const data = wordData[currentWordIndex];
+            document.getElementById('wordClueText').innerText = `"${data.clue}"`;
+            document.getElementById('wordProgressText').innerText = `Soal ${currentWordIndex + 1} dari ${wordData.length}`;
+            document.getElementById('wordSentenceBox').classList.add('hidden');
+
+            const container = document.getElementById('wordOptionsContainer');
+            container.innerHTML = '';
+
+            data.options.forEach(opt => {
+                container.innerHTML += `
+                    <button onclick="checkWordAnswer('${opt.name}')" class="p-4 bg-white border-2 border-slate-200 rounded-2xl shadow-sm hover:border-blue-500 hover:bg-blue-50/50 transition flex flex-col items-center justify-center space-y-2 text-center group">
+                        <span class="text-4xl group-hover:scale-110 transition transform">${opt.icon}</span>
+                        <span class="font-fredoka text-sm font-bold text-slate-800">${opt.name}</span>
+                    </button>
+                `;
+            });
+        }
+
+        function speakWordClue() {
+            const data = wordData[currentWordIndex];
+            playAudio(data.clue);
+        }
+
+        function checkWordAnswer(chosenName) {
+            const data = wordData[currentWordIndex];
+            if (chosenName === data.correct) {
+                playSfx('correct');
+                addStar();
+                playAudio(`Hebat sekali! Jawabannya benar, yaitu ${data.correct}!`);
+                
+                // Show sentence builder bonus
+                const sentenceBox = document.getElementById('wordSentenceBox');
+                document.getElementById('wordSentenceText').innerText = `"${data.sentence}"`;
+                sentenceBox.classList.remove('hidden');
+            } else {
+                playAudio(`Hampir tepat! Coba dengarkan petunjuknya sekali lagi ya.`);
+            }
+        }
+
+        function speakWordSentence() {
+            const data = wordData[currentWordIndex];
+            playAudio(data.sentence);
+        }
+
+        function nextWordQuestion() {
+            currentWordIndex = (currentWordIndex + 1) % wordData.length;
+            loadWordQuestion();
+        }
+
+        const mathConcData = [
+            { count: 4, icon: "🍎", name: "Apel Segar" },
+            { count: 3, icon: "✏️", name: "Pensil Warna" },
+            { count: 6, icon: "🔘", name: "Kancing Baju" },
+            { count: 5, icon: "🍌", name: "Buah Pisang" },
+            { count: 7, icon: "⭐", name: "Bintang Kecil" },
+            { count: 2, icon: "🐟", name: "Ikan Mas" },
+            { count: 8, icon: "🍬", name: "Permen Manis" },
+            { count: 9, icon: "🔮", name: "Kelereng Warna" }
+        ];
+
+        let currentMathConcIndex = 0;
+
+        function loadMathConcQuestion() {
+            const data = mathConcData[currentMathConcIndex];
+            const visualContainer = document.getElementById('mathObjectVisuals');
+            visualContainer.innerHTML = '';
+
+            if (document.getElementById('mathConcProgressText')) {
+                document.getElementById('mathConcProgressText').innerText = `Soal ${currentMathConcIndex + 1} dari ${mathConcData.length}`;
+            }
+
+            for (let i = 1; i <= data.count; i++) {
+                visualContainer.innerHTML += `
+                    <button onclick="countSingleItem(${i})" class="w-14 h-14 bg-emerald-100/80 border-2 border-emerald-300 rounded-2xl flex flex-col items-center justify-center text-2xl hover:scale-110 active:scale-95 transition shadow-sm">
+                        <span>${data.icon}</span>
+                        <span class="text-[9px] font-bold text-emerald-800">${i}</span>
+                    </button>
+                `;
+            }
+
+            // Cards choices - dynamically ensure correct option is present
+            const cardContainer = document.getElementById('mathNumberCards');
+            cardContainer.innerHTML = '';
+            
+            const optionSet = new Set([data.count]);
+            while (optionSet.size < 5) {
+                let randNum = Math.floor(Math.random() * 8) + 2; // numbers 2 through 9
+                optionSet.add(randNum);
+            }
+            const numberOptions = Array.from(optionSet).sort((a, b) => a - b);
+
+            numberOptions.forEach(num => {
+                cardContainer.innerHTML += `
+                    <button onclick="checkMathConcAnswer(${num})" class="w-16 h-20 bg-white border-2 border-slate-200 hover:border-emerald-500 hover:bg-emerald-50 rounded-2xl shadow-sm flex flex-col items-center justify-center transition">
+                        <span class="font-fredoka text-2xl font-bold text-slate-800">${num}</span>
+                        <span class="text-[10px] text-slate-400 font-semibold">Angka</span>
+                    </button>
+                `;
+            });
+
+            document.getElementById('mathConcFeedback').classList.add('hidden');
+        }
+
+        function countSingleItem(numIndex) {
+            playSfx('click');
+            playAudio(`${numIndex}`);
+        }
+
+        function speakMathCountHint() {
+            const data = mathConcData[currentMathConcIndex];
+            playAudio(`Ada ${data.name} di atas meja. Mari kita hitung bersama satu demi satu!`);
+        }
+
+        function checkMathConcAnswer(selectedNum) {
+            const data = mathConcData[currentMathConcIndex];
+            const fb = document.getElementById('mathConcFeedback');
+            fb.classList.remove('hidden');
+
+            if (selectedNum === data.count) {
+                playSfx('correct');
+                addStar();
+                fb.className = "p-3.5 rounded-2xl text-xs font-bold border bg-emerald-50 text-emerald-900 border-emerald-200";
+                fb.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Pintar sekali! Jumlahnya tepat ${data.count} ${data.name}!`;
+                playAudio(`Pintar sekali! Jumlahnya tepat ${data.count} ${data.name}!`);
+            } else {
+                fb.className = "p-3.5 rounded-2xl text-xs font-bold border bg-amber-50 text-amber-900 border-amber-200";
+                fb.innerHTML = `<i class="fa-solid fa-circle-info text-amber-600 mr-1"></i> Coba hitung lagi dengan menyentuh benda di atas satu per satu ya.`;
+                playAudio(`Coba hitung lagi dengan menyentuh benda di atas satu per satu ya.`);
+            }
+        }
+
+        function nextMathConcQuestion() {
+            currentMathConcIndex = (currentMathConcIndex + 1) % mathConcData.length;
+            loadMathConcQuestion();
+        }
+
+        const symStoryData = [
+            {
+                story: "Di piring ada 3 kue biskuit. Lalu Ibu **memberikan lagi** 2 kue biskuit. Simbol matematika untuk kata 'memberikan lagi' atau 'digabung' adalah...",
+                correctSym: "+",
+                explanation: "Simbol Tambah (+) artinya 'Datang Lagi' atau 'Digabung'!"
+            },
+            {
+                story: "Ada 5 burung di atas pohon. Lalu 2 burung **terbang pergi**. Simbol matematika untuk kata 'terbang pergi' atau 'dimakan/hilang' adalah...",
+                correctSym: "-",
+                explanation: "Simbol Kurang (-) artinya 'Pergi/Hilang' atau 'Berkurang'!"
+            },
+            {
+                story: "Ada 4 kancing dan 2 kancing yang digabungkan. **Hasil akhirnya jadi** 6 kancing. Simbol untuk 'Hasil akhir' adalah...",
+                correctSym: "=",
+                explanation: "Simbol Sama Dengan (=) artinya 'Hasil Akhirnya Jadi'!"
+            },
+            {
+                story: "Di meja ada 4 apel. Ibu **membeli lagi** 3 apel dari pasar. Simbol untuk kata 'membeli lagi' atau 'bertambah' adalah...",
+                correctSym: "+",
+                explanation: "Simbol Tambah (+) artinya 'Datang Lagi' atau 'Membeli Lagi'!"
+            },
+            {
+                story: "Ada 6 balon warna-warni. Tiba-tiba 2 balon **meletus**. Simbol untuk kata 'meletus' atau 'berkurang' adalah...",
+                correctSym: "-",
+                explanation: "Simbol Kurang (-) artinya 'Berkurang' atau 'Hilang'!"
+            },
+            {
+                story: "Ayah menata 5 buku cerita dan 3 buku gambar. **Total keseluruhannya sama dengan** 8 buku. Simbol untuk kata 'sama dengan' adalah...",
+                correctSym: "=",
+                explanation: "Simbol Sama Dengan (=) artinya 'Hasil Akhir Keseluruhan'!"
+            },
+            {
+                story: "Ada 8 potong pizza di piring. Kakak **memakan** 3 potong pizza. Simbol untuk kata 'memakan' atau 'berkurang' adalah...",
+                correctSym: "-",
+                explanation: "Simbol Kurang (-) artinya 'Pergi/Dimakan' atau 'Berkurang'!"
+            },
+            {
+                story: "Di kebun ada 2 ekor kelinci. Lalu **datang lagi** 3 ekor kelinci. Simbol untuk kata 'datang lagi' adalah...",
+                correctSym: "+",
+                explanation: "Simbol Tambah (+) artinya 'Datang Lagi' atau 'Bertambah'!"
+            }
+        ];
+
+        let currentSymIndex = 0;
+
+        function loadSymQuestion() {
+            const data = symStoryData[currentSymIndex];
+            document.getElementById('symStoryText').innerText = `"${data.story}"`;
+            document.getElementById('symProgressText').innerText = `Soal ${currentSymIndex + 1} dari ${symStoryData.length}`;
+
+            const container = document.getElementById('symChoicesContainer');
+            container.innerHTML = '';
+
+            const choices = [
+                { sym: "+", label: "Tambah (+)\n(Datang Lagi)" },
+                { sym: "-", label: "Kurang (-)\n(Pergi / Hilang)" },
+                { sym: "=", label: "Sama Dengan (=)\n(Hasil Akhir)" }
+            ];
+
+            choices.forEach(c => {
+                container.innerHTML += `
+                    <button onclick="checkSymAnswer('${c.sym}')" class="p-4 bg-white border-2 border-slate-200 hover:border-rose-400 hover:bg-rose-50/50 rounded-2xl shadow-sm flex flex-col items-center justify-center space-y-1 transition">
+                        <span class="font-fredoka text-3xl font-bold text-slate-800">${c.sym}</span>
+                        <span class="text-[11px] font-bold text-slate-600 whitespace-pre-line text-center">${c.label}</span>
+                    </button>
+                `;
+            });
+
+            document.getElementById('symFeedback').classList.add('hidden');
+        }
+
+        function speakSymStory() {
+            const data = symStoryData[currentSymIndex];
+            playAudio(data.story);
+        }
+
+        function checkSymAnswer(chosenSym) {
+            const data = symStoryData[currentSymIndex];
+            const fb = document.getElementById('symFeedback');
+            fb.classList.remove('hidden');
+
+            if (chosenSym === data.correctSym) {
+                playSfx('correct');
+                addStar();
+                fb.className = "p-3.5 rounded-2xl text-xs font-bold border bg-emerald-50 text-emerald-900 border-emerald-200";
+                fb.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Tepat Sekali! ${data.explanation}`;
+                playAudio(`Tepat sekali! ${data.explanation}`);
+            } else {
+                fb.className = "p-3.5 rounded-2xl text-xs font-bold border bg-rose-50 text-rose-900 border-rose-200";
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> Mari ingat kembali: Simbol + artinya datang lagi, simbol - artinya pergi, dan = artinya hasil akhirnya.`;
+                playAudio(`Mari ingat kembali: Simbol + artinya datang lagi, simbol - artinya pergi, dan = artinya hasil akhirnya.`);
+            }
+        }
+
+        function nextSymQuestion() {
+            currentSymIndex = (currentSymIndex + 1) % symStoryData.length;
+            loadSymQuestion();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStickerBoard();
+            loadSeqStory();
+            loadWordQuestion();
+            loadMathConcQuestion();
+            loadSymQuestion();
+        });
+    </script>
+</body>
+</html>
