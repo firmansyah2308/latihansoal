@@ -199,7 +199,7 @@
                 <div onclick="openAdventureModule()" class="card-portal cursor-pointer bg-gradient-to-b from-amber-500 via-orange-500 to-amber-600 text-white p-5 rounded-3xl flex flex-col items-center justify-between border-b-8 border-amber-800 shadow-xl relative overflow-hidden group">
                     <div class="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full blur-sm"></div>
                     <div class="bg-white/20 p-3.5 rounded-2xl mb-3 text-4xl group-hover:scale-110 transition-transform">
-                        🧩 💡
+                        🧩 🧠
                     </div>
                     <div class="text-center">
                         <span class="bg-yellow-200 text-amber-950 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-2 inline-block shadow-sm">
@@ -207,7 +207,7 @@
                         </span>
                         <h2 class="text-xl font-black mb-1">Petualangan Belajar</h2>
                         <p class="text-xs text-amber-100 font-semibold leading-relaxed mb-4">
-                            Urutan cerita, penemu kata, benda konkret & simbol!
+                            Urutan cerita, penemu kata, numerasi, tebak pola & memori!
                         </p>
                     </div>
                     <button class="bg-yellow-300 hover:bg-yellow-200 text-amber-950 font-black px-5 py-2.5 rounded-2xl text-xs shadow-md transition-all flex items-center gap-1.5 group-hover:px-7">
@@ -761,7 +761,7 @@
             <div class="w-full max-w-4xl bg-white rounded-3xl p-5 sm:p-7 shadow-2xl border-4 border-amber-200 space-y-6">
 
                 <!-- Navigation Sub-Tabs -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2.5">
                     <button onclick="switchAdvTab('seq')" id="tab-adv-seq" class="tab-btn active p-3 bg-white border-2 border-indigo-500 rounded-2xl shadow-sm text-left transition hover:border-indigo-600 flex flex-col items-start gap-1">
                         <span class="p-1.5 bg-indigo-100 text-indigo-600 rounded-xl text-base"><i class="fa-solid fa-list-ol"></i></span>
                         <div>
@@ -791,6 +791,22 @@
                         <div>
                             <div class="font-bold text-xs sm:text-sm text-slate-800">4. Cerita Simbol</div>
                             <div class="text-[10px] text-slate-500">Makna +, -, dan =</div>
+                        </div>
+                    </button>
+
+                    <button onclick="switchAdvTab('pattern')" id="tab-adv-pattern" class="tab-btn p-3 bg-white border-2 border-slate-200 rounded-2xl shadow-sm text-left transition hover:border-amber-400 flex flex-col items-start gap-1">
+                        <span class="p-1.5 bg-amber-100 text-amber-600 rounded-xl text-base"><i class="fa-solid fa-shapes"></i></span>
+                        <div>
+                            <div class="font-bold text-xs sm:text-sm text-slate-800">5. Tebak Pola</div>
+                            <div class="text-[10px] text-slate-500">Lanjutkan Pola Gambar</div>
+                        </div>
+                    </button>
+
+                    <button onclick="switchAdvTab('memory')" id="tab-adv-memory" class="tab-btn p-3 bg-white border-2 border-slate-200 rounded-2xl shadow-sm text-left transition hover:border-purple-400 flex flex-col items-start gap-1">
+                        <span class="p-1.5 bg-purple-100 text-purple-600 rounded-xl text-base"><i class="fa-solid fa-brain"></i></span>
+                        <div>
+                            <div class="font-bold text-xs sm:text-sm text-slate-800">6. Ingat Gambar</div>
+                            <div class="text-[10px] text-slate-500">Permainan Memori</div>
                         </div>
                     </button>
                 </div>
@@ -978,41 +994,41 @@
                         </div>
                     </div>
 
-                    <!-- Symbol Info Cards -->
+                    <!-- Symbol Cards Info -->
                     <div class="grid grid-cols-3 gap-2.5 text-center">
                         <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-2xl">
                             <span class="text-xl font-black text-emerald-600 block">+</span>
-                            <span class="text-xs font-bold text-emerald-900 block">DATANG LAGI</span>
-                            <span class="text-[9px] text-emerald-700">(Bertambah)</span>
+                            <span class="text-[11px] font-bold text-emerald-900 block">DATANG LAGI</span>
+                            <span class="text-[9px] text-emerald-700">(Digabung)</span>
                         </div>
                         <div class="bg-rose-50 border border-rose-200 p-2.5 rounded-2xl">
                             <span class="text-xl font-black text-rose-600 block">-</span>
-                            <span class="text-xs font-bold text-rose-900 block">PERGI / HILANG</span>
+                            <span class="text-[11px] font-bold text-rose-900 block">PERGI / HILANG</span>
                             <span class="text-[9px] text-rose-700">(Berkurang)</span>
                         </div>
                         <div class="bg-amber-50 border border-amber-200 p-2.5 rounded-2xl">
                             <span class="text-xl font-black text-amber-600 block">=</span>
-                            <span class="text-xs font-bold text-amber-900 block">HASIL AKHIR</span>
-                            <span class="text-[9px] text-amber-700">(Sama Dengan)</span>
+                            <span class="text-[11px] font-bold text-amber-900 block">HASIL AKHIR</span>
+                            <span class="text-[9px] text-amber-700">(Jadi)</span>
                         </div>
                     </div>
 
-                    <!-- Context Story -->
-                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2">
+                    <!-- Context Story Prompt -->
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2.5">
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-bold text-slate-700 flex items-center gap-1">
+                            <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
                                 <i class="fa-solid fa-book-open text-rose-500"></i> Cerita Harian Matematika:
                             </span>
                             <button onclick="speakSymStory()" class="px-3 py-1 bg-rose-600 text-white text-xs font-bold rounded-lg hover:bg-rose-700 transition flex items-center gap-1">
-                                <i class="fa-solid fa-volume-high"></i> Baca Cerita
+                                <i class="fa-solid fa-volume-high"></i> Dengarkan Cerita
                             </button>
                         </div>
-                        <p class="text-xs sm:text-sm font-bold text-slate-800 bg-white p-3 rounded-xl border border-slate-200 shadow-sm leading-relaxed" id="symStoryText">
-                            "Di piring ada 3 kue biskuit..."
+                        <p class="text-xs sm:text-sm font-bold text-slate-800 bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm leading-relaxed" id="symStoryText">
+                            <!-- Injected by JS -->
                         </p>
                     </div>
 
-                    <!-- Choices -->
+                    <!-- Choices Container -->
                     <div class="grid grid-cols-3 gap-2.5" id="symChoicesContainer">
                         <!-- Injected by JS -->
                     </div>
@@ -1020,11 +1036,82 @@
                     <div id="symFeedback" class="hidden p-3 rounded-2xl text-xs font-bold border text-center"></div>
 
                     <div class="flex justify-between items-center pt-3 border-t border-slate-100">
-                        <span class="text-xs text-slate-500" id="symProgressText">Soal 1 dari 8</span>
+                        <span class="text-xs text-slate-500 font-semibold" id="symProgressText">Soal 1 dari 8</span>
                         <button onclick="nextSymQuestion()" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-1">
-                            Cerita Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                            Cerita Simbol Berikutnya <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
+                </div>
+
+                <!-- SUB-TAB 5: TEBAK POLA (PATTERN RECOGNITION) -->
+                <div id="mod-adv-pattern" class="adv-panel hidden space-y-5">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 pb-3 border-b border-slate-100">
+                        <div>
+                            <span class="px-3 py-0.5 bg-amber-100 text-amber-700 text-[10px] font-extrabold rounded-full uppercase">Penalaran Pola</span>
+                            <h3 class="text-base sm:text-xl font-bold text-slate-800 mt-1">Petualangan Urutan Pola 🧩</h3>
+                            <p class="text-xs text-slate-500">Perhatikan urutan gambar di bawah ini, lalu pilih gambar yang tepat untuk mengisi tanda tanya <strong>[ ? ]</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pattern Display Box -->
+                    <div class="bg-amber-50/70 rounded-2xl p-4 sm:p-6 border border-amber-200 space-y-3 text-center">
+                        <span class="text-xs font-bold text-amber-900 uppercase">Perhatikan Urutan Pola Berikut:</span>
+                        <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 p-4 bg-white rounded-2xl border border-amber-200 shadow-inner" id="patternDisplayBox">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Choices Container -->
+                    <div>
+                        <p class="text-xs font-bold text-slate-700 mb-2 text-center">Gambar mana yang melengkapi pola di atas?</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="patternChoicesContainer">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
+                    <div id="patternFeedback" class="hidden p-3 rounded-2xl text-xs font-bold border text-center"></div>
+
+                    <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                        <button onclick="speakPatternHint()" class="px-3 py-1.5 bg-amber-100 text-amber-900 text-xs font-bold rounded-xl hover:bg-amber-200 transition flex items-center gap-1">
+                            <i class="fa-solid fa-volume-high"></i> Petunjuk Pola
+                        </button>
+                        <span class="text-xs text-slate-500 font-semibold" id="patternProgressText">Soal 1 dari 8</span>
+                        <button onclick="nextPatternQuestion()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs rounded-xl shadow transition flex items-center gap-1">
+                            Pola Berikutnya <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SUB-TAB 6: PERMAINAN MEMORI (SIMPLE MEMORY) -->
+                <div id="mod-adv-memory" class="adv-panel hidden space-y-5">
+                    <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 pb-3 border-b border-slate-100">
+                        <div>
+                            <span class="px-3 py-0.5 bg-purple-100 text-purple-700 text-[10px] font-extrabold rounded-full uppercase">Melatih Ingatan</span>
+                            <h3 class="text-base sm:text-xl font-bold text-slate-800 mt-1">Permainan Memori Gambar 🧠</h3>
+                            <p class="text-xs text-slate-500">Buka kartu dan temukan pasangan gambar yang sama! Gunakan tombol intip jika perlu bantuan.</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="previewMemoryCards()" class="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-900 text-xs font-bold rounded-xl transition flex items-center gap-1">
+                                <i class="fa-solid fa-eye"></i> Intip 2 Detik
+                            </button>
+                            <button onclick="resetMemoryGame()" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-xl transition flex items-center gap-1">
+                                <i class="fa-solid fa-rotate-right"></i> Acak Ulang
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Memory Game Status Bar -->
+                    <div class="flex justify-between items-center bg-purple-50/70 p-3 rounded-2xl border border-purple-100 text-xs font-bold text-purple-900">
+                        <span>Pasangan Ditemukan: <span id="memoryPairsFound" class="text-purple-700 font-black">0 / 4</span></span>
+                        <span>Langkah: <span id="memoryMoveCount" class="text-purple-700 font-black">0</span></span>
+                    </div>
+
+                    <!-- Memory Cards Grid -->
+                    <div class="grid grid-cols-4 gap-2.5 sm:gap-3.5 max-w-md mx-auto p-2" id="memoryCardsGrid">
+                        <!-- Injected by JS -->
+                    </div>
+
+                    <div id="memoryFeedback" class="hidden p-3 rounded-2xl text-xs font-bold border text-center"></div>
                 </div>
 
                 <!-- Reward Sticker Collection Board -->
@@ -1201,6 +1288,7 @@
             document.getElementById('adventureModule').classList.remove('hidden');
             document.getElementById('caseToggleBtn').classList.add('hidden');
             renderStickerBoard();
+            switchAdvTab('seq');
         }
 
         function updateGlobalScores() {
@@ -1215,26 +1303,31 @@
 
             const advStars = stars || 0;
 
-            document.getElementById('portalReadingScore').textContent = readScore;
-            document.getElementById('portalMathScore').textContent = mathScore;
-            document.getElementById('portalAdventureScore').textContent = advStars;
+            const readScoreEl = document.getElementById('portalReadingScore');
+            const mathScoreEl = document.getElementById('portalMathScore');
+            const advScoreEl = document.getElementById('portalAdventureScore');
+            const globalScoreEl = document.getElementById('globalScoreDisplay');
 
-            document.getElementById('globalScoreDisplay').textContent = `${readScore}/20 (📖) | ${mathScore}/100 (🔢) | ${advStars}⭐`;
+            if (readScoreEl) readScoreEl.textContent = readScore;
+            if (mathScoreEl) mathScoreEl.textContent = mathScore;
+            if (advScoreEl) advScoreEl.textContent = advStars;
+
+            if (globalScoreEl) globalScoreEl.textContent = `${readScore}/20 (📖) | ${mathScore}/100 (🔢) | ${advStars}⭐`;
             if (document.getElementById('mathTotalScoreDisplay')) {
                 document.getElementById('mathTotalScoreDisplay').textContent = `${mathScore} / 100`;
             }
         }
 
         function resetAllPortalStats() {
-            if (confirm("Reset seluruh rekor nilai membaca, berhitung, dan bintang petualangan?")) {
-                localStorage.removeItem('baca_ceria_highscore');
-                if (typeof generateAllMathQuestions === 'function') generateAllMathQuestions();
-                stars = 0;
-                if (document.getElementById('advStarDisplay')) document.getElementById('advStarDisplay').textContent = '0';
-                updateGlobalScores();
-                if (typeof renderMathHomeCards === 'function') renderMathHomeCards();
-                renderStickerBoard();
-            }
+            // Direct reset with clear feedback to avoid confirm() issues
+            localStorage.removeItem('baca_ceria_highscore');
+            if (typeof generateAllMathQuestions === 'function') generateAllMathQuestions();
+            stars = 0;
+            if (document.getElementById('advStarDisplay')) document.getElementById('advStarDisplay').textContent = '0';
+            updateGlobalScores();
+            if (typeof renderMathHomeCards === 'function') renderMathHomeCards();
+            renderStickerBoard();
+            playSound('click');
         }
 
         function toggleLetterCase() {
@@ -1343,6 +1436,7 @@
 
         function renderSyllables() {
             const tabsBox = document.getElementById('consonantTabs');
+            if (!tabsBox) return;
             tabsBox.innerHTML = '';
 
             syllableData.forEach(item => {
@@ -1361,6 +1455,7 @@
             });
 
             const gridBox = document.getElementById('syllablesGrid');
+            if (!gridBox) return;
             gridBox.innerHTML = '';
             const currentGroupData = syllableData.find(s => s.group === activeConsonant) || syllableData[0];
 
@@ -1749,6 +1844,7 @@
 
         function renderMathQuestionGrid() {
             const gridContainer = document.getElementById('mathQuestionGrid');
+            if (!gridContainer) return;
             gridContainer.innerHTML = '';
             const currentQuestions = allMathGroupsData[currentMathGroupIndex].questions;
 
@@ -1816,6 +1912,7 @@
 
         function showMathBanner(msg, classes) {
             const banner = document.getElementById('mathFeedbackBanner');
+            if (!banner) return;
             banner.className = `mt-3 w-full py-2 px-3 rounded-xl text-center font-bold text-xs border block pop-in ${classes}`;
             banner.innerHTML = msg;
         }
@@ -1909,10 +2006,10 @@
             if (isTimerRunning) {
                 clearInterval(timerInterval);
                 isTimerRunning = false;
-                btnIcon.className = 'fa-solid fa-play';
+                if (btnIcon) btnIcon.className = 'fa-solid fa-play';
             } else {
                 isTimerRunning = true;
-                btnIcon.className = 'fa-solid fa-pause';
+                if (btnIcon) btnIcon.className = 'fa-solid fa-pause';
                 timerInterval = setInterval(() => {
                     if (timerSeconds > 0) {
                         timerSeconds--;
@@ -1920,7 +2017,7 @@
                     } else {
                         clearInterval(timerInterval);
                         isTimerRunning = false;
-                        btnIcon.className = 'fa-solid fa-play';
+                        if (btnIcon) btnIcon.className = 'fa-solid fa-play';
                         speakWord("Sesi belajar 15 menit sudah selesai! Hebat sekali, sekarang waktunya istirahat sebentar ya.");
                     }
                 }, 1000);
@@ -1930,7 +2027,8 @@
         function updateAdvTimerDisplay() {
             const mins = Math.floor(timerSeconds / 60);
             const secs = timerSeconds % 60;
-            document.getElementById('advTimerDisplay').innerText = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+            const timerEl = document.getElementById('advTimerDisplay');
+            if (timerEl) timerEl.innerText = `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
         }
 
         function addStar() {
@@ -1962,7 +2060,7 @@
         function switchAdvTab(tabId) {
             playSound('click');
             document.querySelectorAll('#adventureModule .tab-btn').forEach(b => {
-                b.classList.remove('active', 'border-indigo-500', 'border-emerald-400', 'border-rose-400', 'border-blue-400');
+                b.classList.remove('active', 'border-indigo-500', 'border-emerald-400', 'border-rose-400', 'border-blue-400', 'border-amber-400', 'border-purple-400');
                 b.classList.add('border-slate-200');
             });
 
@@ -1977,6 +2075,8 @@
                 if (tabId === 'words') targetTab.classList.add('border-blue-400');
                 if (tabId === 'math-conc') targetTab.classList.add('border-emerald-400');
                 if (tabId === 'math-sym') targetTab.classList.add('border-rose-400');
+                if (tabId === 'pattern') targetTab.classList.add('border-amber-400');
+                if (tabId === 'memory') targetTab.classList.add('border-purple-400');
 
                 targetMod.classList.remove('hidden');
             }
@@ -1999,11 +2099,14 @@
 
         function loadSeqStory() {
             const data = seqData[currentSeqIndex];
-            document.getElementById('seqQuestionText').innerHTML = `<i class="fa-solid fa-circle-question text-indigo-600"></i> Cerita: ${data.storyTitle}`;
-            document.getElementById('seqProgressText').innerText = `Cerita ${currentSeqIndex + 1} dari ${seqData.length}`;
+            const qText = document.getElementById('seqQuestionText');
+            const pText = document.getElementById('seqProgressText');
+            if (qText) qText.innerHTML = `<i class="fa-solid fa-circle-question text-indigo-600"></i> Cerita: ${data.storyTitle}`;
+            if (pText) pText.innerText = `Cerita ${currentSeqIndex + 1} dari ${seqData.length}`;
 
             const shuffled = shuffleArray(data.cards);
             const container = document.getElementById('seqCardContainer');
+            if (!container) return;
             container.innerHTML = '';
 
             shuffled.forEach(card => {
@@ -2027,14 +2130,17 @@
             if (emptyIndex === -1) return;
 
             seqSlotSelections[emptyIndex] = cardObj;
-            document.getElementById(`card-btn-${cardId}`).classList.add('opacity-30', 'pointer-events-none');
+            const cardBtn = document.getElementById(`card-btn-${cardId}`);
+            if (cardBtn) cardBtn.classList.add('opacity-30', 'pointer-events-none');
 
             const slotEl = document.getElementById(`slot-content-${emptyIndex}`);
-            slotEl.innerHTML = `
-                <span class="text-2xl sm:text-3xl mb-1">${cardObj.icon}</span>
-                <span class="text-xs font-bold text-slate-800">${cardObj.text}</span>
-                <span class="text-[10px] text-rose-500 font-bold mt-0.5">(Ketuk untuk lepas)</span>
-            `;
+            if (slotEl) {
+                slotEl.innerHTML = `
+                    <span class="text-2xl sm:text-3xl mb-1">${cardObj.icon}</span>
+                    <span class="text-xs font-bold text-slate-800">${cardObj.text}</span>
+                    <span class="text-[10px] text-rose-500 font-bold mt-0.5">(Ketuk untuk lepas)</span>
+                `;
+            }
 
             speakWord(cardObj.text);
         }
@@ -2049,19 +2155,25 @@
             const btn = document.getElementById(`card-btn-${cardObj.id}`);
             if (btn) btn.classList.remove('opacity-30', 'pointer-events-none');
 
-            document.getElementById(`slot-content-${slotIndex}`).innerHTML = `
-                <i class="fa-regular fa-square-plus text-xl mb-1 text-slate-300"></i>
-                Pilih kartu di bawah
-            `;
+            const slotEl = document.getElementById(`slot-content-${slotIndex}`);
+            if (slotEl) {
+                slotEl.innerHTML = `
+                    <i class="fa-regular fa-square-plus text-xl mb-1 text-slate-300"></i>
+                    Pilih kartu di bawah
+                `;
+            }
         }
 
         function resetSeqStory() {
             seqSlotSelections = [null, null, null];
             for (let i = 0; i < 3; i++) {
-                document.getElementById(`slot-content-${i}`).innerHTML = `
-                    <i class="fa-regular fa-square-plus text-xl mb-1 text-slate-300"></i>
-                    Pilih kartu di bawah
-                `;
+                const slotEl = document.getElementById(`slot-content-${i}`);
+                if (slotEl) {
+                    slotEl.innerHTML = `
+                        <i class="fa-regular fa-square-plus text-xl mb-1 text-slate-300"></i>
+                        Pilih kartu di bawah
+                    `;
+                }
             }
             const data = seqData[currentSeqIndex];
             data.cards.forEach(c => {
@@ -2069,11 +2181,12 @@
                 if (btn) btn.classList.remove('opacity-30', 'pointer-events-none');
             });
             const fb = document.getElementById('seqFeedback');
-            fb.classList.add('hidden');
+            if (fb) fb.classList.add('hidden');
         }
 
         function checkSeqAnswer() {
             const fb = document.getElementById('seqFeedback');
+            if (!fb) return;
             fb.classList.remove('hidden');
 
             if (seqSlotSelections.includes(null)) {
@@ -2127,11 +2240,16 @@
 
         function loadWordQuestion() {
             const data = wordData[currentWordIndex];
-            document.getElementById('wordClueText').innerText = `"${data.clue}"`;
-            document.getElementById('wordProgressText').innerText = `Soal ${currentWordIndex + 1} dari ${wordData.length}`;
-            document.getElementById('wordSentenceBox').classList.add('hidden');
+            const clueEl = document.getElementById('wordClueText');
+            const progEl = document.getElementById('wordProgressText');
+            const sBox = document.getElementById('wordSentenceBox');
+
+            if (clueEl) clueEl.innerText = `"${data.clue}"`;
+            if (progEl) progEl.innerText = `Soal ${currentWordIndex + 1} dari ${wordData.length}`;
+            if (sBox) sBox.classList.add('hidden');
 
             const container = document.getElementById('wordOptionsContainer');
+            if (!container) return;
             container.innerHTML = '';
 
             data.options.forEach(opt => {
@@ -2154,8 +2272,10 @@
                 playSound('correct');
                 addStar();
                 speakWord(`Hebat sekali! Jawabannya benar, yaitu ${data.correct}!`);
-                document.getElementById('wordSentenceText').innerText = `"${data.sentence}"`;
-                document.getElementById('wordSentenceBox').classList.remove('hidden');
+                const sText = document.getElementById('wordSentenceText');
+                const sBox = document.getElementById('wordSentenceBox');
+                if (sText) sText.innerText = `"${data.sentence}"`;
+                if (sBox) sBox.classList.remove('hidden');
             } else {
                 playSound('wrong');
                 speakWord(`Hampir tepat! Coba dengarkan petunjuknya sekali lagi ya.`);
@@ -2188,9 +2308,11 @@
         function loadMathConcQuestion() {
             const data = mathConcData[currentMathConcIndex];
             const visualContainer = document.getElementById('mathObjectVisuals');
+            if (!visualContainer) return;
             visualContainer.innerHTML = '';
 
-            document.getElementById('mathConcProgressText').innerText = `Soal ${currentMathConcIndex + 1} dari ${mathConcData.length}`;
+            const pText = document.getElementById('mathConcProgressText');
+            if (pText) pText.innerText = `Soal ${currentMathConcIndex + 1} dari ${mathConcData.length}`;
 
             for (let i = 1; i <= data.count; i++) {
                 visualContainer.innerHTML += `
@@ -2202,6 +2324,7 @@
             }
 
             const cardContainer = document.getElementById('mathNumberCards');
+            if (!cardContainer) return;
             cardContainer.innerHTML = '';
             
             const optionSet = new Set([data.count]);
@@ -2220,7 +2343,8 @@
                 `;
             });
 
-            document.getElementById('mathConcFeedback').classList.add('hidden');
+            const fb = document.getElementById('mathConcFeedback');
+            if (fb) fb.classList.add('hidden');
         }
 
         function countSingleItem(numIndex) {
@@ -2236,6 +2360,7 @@
         function checkMathConcAnswer(selectedNum) {
             const data = mathConcData[currentMathConcIndex];
             const fb = document.getElementById('mathConcFeedback');
+            if (!fb) return;
             fb.classList.remove('hidden');
 
             if (selectedNum === data.count) {
@@ -2273,10 +2398,14 @@
 
         function loadSymQuestion() {
             const data = symStoryData[currentSymIndex];
-            document.getElementById('symStoryText').innerText = `"${data.story}"`;
-            document.getElementById('symProgressText').innerText = `Soal ${currentSymIndex + 1} dari ${symStoryData.length}`;
+            const storyEl = document.getElementById('symStoryText');
+            const progEl = document.getElementById('symProgressText');
+
+            if (storyEl) storyEl.innerText = `"${data.story}"`;
+            if (progEl) progEl.innerText = `Soal ${currentSymIndex + 1} dari ${symStoryData.length}`;
 
             const container = document.getElementById('symChoicesContainer');
+            if (!container) return;
             container.innerHTML = '';
 
             const choices = [
@@ -2294,7 +2423,8 @@
                 `;
             });
 
-            document.getElementById('symFeedback').classList.add('hidden');
+            const fb = document.getElementById('symFeedback');
+            if (fb) fb.classList.add('hidden');
         }
 
         function speakSymStory() {
@@ -2304,6 +2434,7 @@
         function checkSymAnswer(chosenSym) {
             const data = symStoryData[currentSymIndex];
             const fb = document.getElementById('symFeedback');
+            if (!fb) return;
             fb.classList.remove('hidden');
 
             if (chosenSym === data.correctSym) {
@@ -2323,6 +2454,197 @@
         function nextSymQuestion() {
             currentSymIndex = (currentSymIndex + 1) % symStoryData.length;
             loadSymQuestion();
+        }
+
+        // Sub-Tab 5: Pattern Recognition
+        const patternData = [
+            { pattern: ["🍎", "🍌", "🍎", "🍌", "?"], answer: "🍎", options: ["🍎", "🍌", "🍊", "🍇"], hint: "Apel, Pisang, Apel, Pisang... berikutnya adalah Apel!" },
+            { pattern: ["🔴", "🔵", "🟡", "🔴", "🔵", "?"], answer: "🟡", options: ["🟢", "🔴", "🔵", "🟡"], hint: "Merah, Biru, Kuning, Merah, Biru... berikutnya adalah Kuning!" },
+            { pattern: ["🐱", "🐶", "🐱", "🐶", "?"], answer: "🐱", options: ["🐱", "🐶", "🐭", "🐰"], hint: "Kucing, Anjing, Kucing, Anjing... berikutnya adalah Kucing!" },
+            { pattern: ["⭐", "🌙", "⭐", "🌙", "?"], answer: "⭐", options: ["☀️", "⭐", "🌙", "☁️"], hint: "Bintang, Bulan, Bintang, Bulan... berikutnya adalah Bintang!" },
+            { pattern: ["🚗", "🚗", "🚲", "🚗", "🚗", "?"], answer: "🚲", options: ["🚗", "🚲", "✈️", "🚀"], hint: "Mobil, Mobil, Sepeda, Mobil, Mobil... berikutnya adalah Sepeda!" },
+            { pattern: ["🔺", "🟦", "🔺", "🟦", "?"], answer: "🔺", options: ["🔺", "🟦", "🟡", "⭐"], hint: "Segitiga, Persegi, Segitiga, Persegi... berikutnya adalah Segitiga!" },
+            { pattern: ["🌸", "🌻", "🌸", "🌻", "?"], answer: "🌸", options: ["🌸", "🌻", "🌹", "🌷"], hint: "Bunga Merah, Bunga Kuning, Bunga Merah, Bunga Kuning... berikutnya Bunga Merah!" },
+            { pattern: ["1️⃣", "2️⃣", "3️⃣", "1️⃣", "2️⃣", "?"], answer: "3️⃣", options: ["1️⃣", "2️⃣", "3️⃣", "4️⃣"], hint: "Satu, Dua, Tiga, Satu, Dua... berikutnya adalah Tiga!" }
+        ];
+
+        let currentPatternIndex = 0;
+
+        function loadPatternQuestion() {
+            const data = patternData[currentPatternIndex];
+            const displayBox = document.getElementById('patternDisplayBox');
+            if (!displayBox) return;
+            displayBox.innerHTML = '';
+
+            data.pattern.forEach(item => {
+                const isTarget = item === '?';
+                displayBox.innerHTML += `
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl font-black shadow-sm border-2 ${isTarget ? 'bg-amber-100 border-dashed border-amber-400 text-amber-700 animate-pulse' : 'bg-white border-amber-200 text-slate-800'}">
+                        ${item}
+                    </div>
+                `;
+            });
+
+            const pText = document.getElementById('patternProgressText');
+            if (pText) pText.innerText = `Soal ${currentPatternIndex + 1} dari ${patternData.length}`;
+
+            const choicesBox = document.getElementById('patternChoicesContainer');
+            if (!choicesBox) return;
+            choicesBox.innerHTML = '';
+
+            const shuffledOpts = shuffleArray(data.options);
+            shuffledOpts.forEach(opt => {
+                choicesBox.innerHTML += `
+                    <button onclick="checkPatternAnswer('${opt}')" class="p-3 bg-white border-2 border-slate-200 hover:border-amber-400 hover:bg-amber-50 rounded-2xl shadow-sm flex flex-col items-center justify-center transition active:scale-95">
+                        <span class="text-3xl sm:text-4xl mb-1">${opt}</span>
+                        <span class="text-[10px] font-bold text-slate-500">Pilih Ini</span>
+                    </button>
+                `;
+            });
+
+            const fb = document.getElementById('patternFeedback');
+            if (fb) fb.classList.add('hidden');
+        }
+
+        function speakPatternHint() {
+            speakWord(patternData[currentPatternIndex].hint);
+        }
+
+        function checkPatternAnswer(selected) {
+            const data = patternData[currentPatternIndex];
+            const fb = document.getElementById('patternFeedback');
+            if (!fb) return;
+            fb.classList.remove('hidden');
+
+            if (selected === data.answer) {
+                playSound('correct');
+                addStar();
+                fb.className = "p-3 rounded-2xl text-xs font-bold border bg-emerald-50 text-emerald-900 border-emerald-200";
+                fb.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Hebat! Jawabannya tepat sekali ${data.answer}!`;
+                speakWord(`Hebat! Jawabannya tepat sekali!`);
+            } else {
+                playSound('wrong');
+                fb.className = "p-3 rounded-2xl text-xs font-bold border bg-rose-50 text-rose-900 border-rose-200";
+                fb.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-600 mr-1"></i> Belum tepat. Dengarkan petunjuk pola lalu coba lagi ya!`;
+                speakWord("Belum tepat. Dengarkan petunjuk pola lalu coba lagi ya!");
+            }
+        }
+
+        function nextPatternQuestion() {
+            currentPatternIndex = (currentPatternIndex + 1) % patternData.length;
+            loadPatternQuestion();
+        }
+
+        // Sub-Tab 6: Memory Game
+        const memoryEmojiPool = ['🐱', '🐶', '🐰', '🐸', '🍎', '🍌', '🚗', '⭐', '🎈', '🍦', '🦁', '👑'];
+        let memoryDeck = [];
+        let flippedMemoryCards = [];
+        let matchedPairs = 0;
+        let memoryMoves = 0;
+        let isMemoryLock = false;
+
+        function resetMemoryGame() {
+            playSound('click');
+            const selectedEmojis = shuffleArray(memoryEmojiPool).slice(0, 4); // 4 pairs = 8 cards
+            const paired = shuffleArray([...selectedEmojis, ...selectedEmojis]);
+
+            memoryDeck = paired.map((emoji, index) => ({
+                id: index,
+                emoji: emoji,
+                isFlipped: false,
+                isMatched: false
+            }));
+
+            flippedMemoryCards = [];
+            matchedPairs = 0;
+            memoryMoves = 0;
+            isMemoryLock = false;
+
+            updateMemoryUI();
+            const fb = document.getElementById('memoryFeedback');
+            if (fb) fb.classList.add('hidden');
+        }
+
+        function updateMemoryUI() {
+            const pairsEl = document.getElementById('memoryPairsFound');
+            const movesEl = document.getElementById('memoryMoveCount');
+            if (pairsEl) pairsEl.innerText = `${matchedPairs} / 4`;
+            if (movesEl) movesEl.innerText = memoryMoves;
+
+            const grid = document.getElementById('memoryCardsGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            memoryDeck.forEach(card => {
+                const show = card.isFlipped || card.isMatched;
+                grid.innerHTML += `
+                    <button onclick="flipMemoryCard(${card.id})" ${show || isMemoryLock ? 'disabled' : ''} class="aspect-square rounded-2xl font-black text-2xl sm:text-3xl flex items-center justify-center transition-all duration-300 shadow-md ${show ? 'bg-purple-100 border-2 border-purple-400 rotate-0' : 'bg-gradient-to-b from-purple-500 to-indigo-600 text-white border-b-4 border-indigo-800 active:scale-95'}">
+                        ${show ? card.emoji : '❓'}
+                    </button>
+                `;
+            });
+        }
+
+        function flipMemoryCard(cardId) {
+            if (isMemoryLock) return;
+            const card = memoryDeck.find(c => c.id === cardId);
+            if (!card || card.isFlipped || card.isMatched) return;
+
+            playSound('click');
+            card.isFlipped = true;
+            flippedMemoryCards.push(card);
+            updateMemoryUI();
+
+            if (flippedMemoryCards.length === 2) {
+                memoryMoves++;
+                isMemoryLock = true;
+                const [c1, c2] = flippedMemoryCards;
+
+                if (c1.emoji === c2.emoji) {
+                    playSound('correct');
+                    c1.isMatched = true;
+                    c2.isMatched = true;
+                    matchedPairs++;
+                    flippedMemoryCards = [];
+                    isMemoryLock = false;
+                    updateMemoryUI();
+
+                    if (matchedPairs === 4) {
+                        playSound('win');
+                        addStar();
+                        const fb = document.getElementById('memoryFeedback');
+                        if (fb) {
+                            fb.classList.remove('hidden');
+                            fb.className = "p-3 rounded-2xl text-xs font-bold border bg-emerald-50 text-emerald-900 border-emerald-200 pop-in";
+                            fb.innerHTML = `🎉 Hore! Kamu berhasil menemukan semua pasangan dalam ${memoryMoves} langkah!`;
+                        }
+                        speakWord(`Hore! Kamu berhasil menemukan semua pasangan gambar!`);
+                    }
+                } else {
+                    playSound('wrong');
+                    setTimeout(() => {
+                        c1.isFlipped = false;
+                        c2.isFlipped = false;
+                        flippedMemoryCards = [];
+                        isMemoryLock = false;
+                        updateMemoryUI();
+                    }, 1000);
+                }
+            }
+        }
+
+        function previewMemoryCards() {
+            if (isMemoryLock) return;
+            playSound('click');
+            isMemoryLock = true;
+            memoryDeck.forEach(c => c.isFlipped = true);
+            updateMemoryUI();
+
+            setTimeout(() => {
+                memoryDeck.forEach(c => { if (!c.isMatched) c.isFlipped = false; });
+                isMemoryLock = false;
+                updateMemoryUI();
+            }, 2000);
         }
 
         // Setup Audio unlocker for browser Context
@@ -2351,11 +2673,13 @@
             updateGlobalScores();
             setupMathInputNavigation();
 
-            // Load Adventure Data
+            // Load Adventure Data safely
             loadSeqStory();
             loadWordQuestion();
             loadMathConcQuestion();
             loadSymQuestion();
+            loadPatternQuestion();
+            resetMemoryGame();
             renderStickerBoard();
         };
     </script>
